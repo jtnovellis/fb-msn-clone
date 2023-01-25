@@ -3,7 +3,7 @@ import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { useAuth } from '../conext/AuthContext';
 
-function Signup() {
+export function Signup() {
   const { signup } = useAuth();
   const usernameRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
@@ -16,23 +16,11 @@ function Signup() {
     const username = usernameRef.current?.value;
     const name = nameRef.current?.value;
     const imageUrl = imageUrlRef.current?.value;
-
-    if (
-      username === null ||
-      username === '' ||
-      name === null ||
-      name === '' ||
-      imageUrl === null ||
-      imageUrl === ''
-    ) {
+    if (username == null || username === '' || name == null || name === '') {
       return;
     }
 
-    signup.mutate({
-      id: username as string,
-      name: name as string,
-      image: imageUrl,
-    });
+    signup.mutate({ id: username, name, image: imageUrl });
   }
 
   return (
@@ -42,22 +30,20 @@ function Signup() {
         onSubmit={handleSubmit}
         className='grid grid-cols-[auto,1fr] gap-x-3 gap-y-5 items-center justify-items-end'
       >
-        <label htmlFor='username'>Username</label>
+        <label htmlFor='userName'>Username</label>
         <Input id='userName' pattern='\S*' required ref={usernameRef} />
         <label htmlFor='name'>Name</label>
         <Input id='name' required ref={nameRef} />
-        <label htmlFor='iamgeUrl'>Image Url</label>
-        <Input id='imageUrl' ref={imageUrlRef} type='url' />
+        <label htmlFor='imageUrl'>Image Url</label>
+        <Input id='imageUrl' type='url' ref={imageUrlRef} />
         <Button
           disabled={signup.isLoading}
           type='submit'
           className='col-span-full'
         >
-          {signup.isLoading ? 'Loading...' : 'Sign Up'}
+          {signup.isLoading ? 'Loading..' : 'Sign Up'}
         </Button>
       </form>
     </>
   );
 }
-
-export default Signup;
