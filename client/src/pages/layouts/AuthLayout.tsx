@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import FullScreenCard from '../../components/FullScreenCard';
 
-function Auth() {
+function AuthLayout() {
   return (
     <FullScreenCard>
       <FullScreenCard.Body>
@@ -12,4 +12,4 @@ function Auth() {
   );
 }
 
-export default Auth;
+export default AuthLayout;
