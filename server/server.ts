@@ -1,0 +1,13 @@
+import { config } from 'dotenv';
+config();
+import fastify from 'fastify';
+import cors from '@fastify/cors';
+import { userRoutes } from './routes/user';
+
+const app = fastify();
+const PORT = parseInt(process.env.PORT!);
+app.register(cors, { origin: process.env.CLIENT_URL });
+
+app.register(userRoutes);
+
+app.listen({ port: PORT });
